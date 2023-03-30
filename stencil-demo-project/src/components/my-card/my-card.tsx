@@ -36,6 +36,10 @@ export class MyCard {
         }
     }
 
+    onUserInput(event: Event) {
+        this.userName = (event.target as HTMLInputElement).value
+    }
+
     // lifecycle methods
 
     // when component connects to the dom
@@ -112,6 +116,8 @@ export class MyCard {
                 </div>
             </div>
         );
+
+
         let mainContent = (
             <div class="may-card-wrapper">
                 <h1>Hi, I am {this.userName}</h1>
@@ -120,6 +126,10 @@ export class MyCard {
                 <button class="btn-react" onClick={this.onContentChange.bind(this, 'reacttab')}>React</button>
                 {this.showReactTab && reactContent}
                 {this.showStencilTab && stencilContent}
+
+                <hr />
+                <h3>Two way data binding</h3>
+                <input type="text" class="my-input-textbox" onInput={this.onUserInput.bind(this)} value={this.userName} />
             </div>
         )
 
