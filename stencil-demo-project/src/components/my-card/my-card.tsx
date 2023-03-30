@@ -36,14 +36,60 @@ export class MyCard {
         }
     }
 
+    // lifecycle methods
+
+    // when component connects to the dom
+    connectedCallback() {
+        console.log('connectedcallback')
+    }
+    // when component disconnects from the dom
+    disconnectedCallback() {
+        console.log('disconnectedcallback')
+    }
+
+    // This method is only called once
+    // this is a good place to load data asyncronously
+    componentWillLoad() {
+        console.log('Componentwillload component is about to load')
+    }
+
+    // It is always recomended to make any rendered state updates
+    // within componentWillRender()
+    // this.APIdata = 'updated'
+    componentWillRender() {
+        console.log('componentWillRender')
+    }
+
+
+    // called just once after component fully loaded
+    // and the forst render() occurs
+    componentDidLoad() {
+        console.log('componentdidload')
+    }
+
+    // This hook is called when a Prop or State property changes
+    // and a render is about to be requested. If this method return 
+    // false the the component will not update anymore.
+    componentShouldUpdate() {
+        return true;
+    }
+
+    componentWillUpdate() {
+        console.log('componentwillupadte')
+    }
+
+    componentDidUpdate() {
+        console.log('componentdidupdate')
+    }
+  
+
+
+
+
     @Watch('userName')
     
     watchHadler(newValue: boolean, oldValue: boolean) {
         console.log("The new value of name is " + newValue + " and old value is " + oldValue)
-    }
-
-    componentWillUpdate() {
-     console.log("componentWillUpdate")
     }
 
     render() {
