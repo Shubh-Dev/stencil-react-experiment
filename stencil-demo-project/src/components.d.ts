@@ -7,7 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface MyCard {
-        "name": string;
+        "userName": string;
     }
 }
 declare global {
@@ -23,7 +23,7 @@ declare global {
 }
 declare namespace LocalJSX {
     interface MyCard {
-        "name"?: string;
+        "userName"?: string;
     }
     interface IntrinsicElements {
         "my-card": MyCard;
