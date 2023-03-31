@@ -13,6 +13,10 @@ export namespace Components {
         "searchText": string;
     }
 }
+export interface SearchWorldCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSearchWorldElement;
+}
 declare global {
     interface HTMLMyCardElement extends Components.MyCard, HTMLStencilElement {
     }
@@ -36,6 +40,7 @@ declare namespace LocalJSX {
         "userName"?: string;
     }
     interface SearchWorld {
+        "onSearchWorldEventSelected"?: (event: SearchWorldCustomEvent<string>) => void;
         "searchText"?: string;
     }
     interface IntrinsicElements {
