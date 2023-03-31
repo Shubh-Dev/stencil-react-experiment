@@ -1,4 +1,4 @@
-import { Component, Prop, h, State } from "@stencil/core";
+import { Component, Prop, h, State, Event, EventEmitter } from "@stencil/core";
 
 @Component({
     tag: 'search-world',
@@ -18,13 +18,10 @@ export class SearchWorld {
         .then((parsedRes) => {
             let metaData =parsedRes['bestMatches']
             this.searchResult = metaData.map((data) => {
-                
                 return {name: data['2. name'],
                 marketOpen: data['5. marketOpen']
               }
             })
-            console.log(this.searchResult)
-            
         })
     }
 
@@ -34,9 +31,16 @@ export class SearchWorld {
 
     }
 
+    @Event({ bubbles: true, composed: true }) searchWorldEventSelected : EventEmitter<string>;
+
+    onRowClick(name: string) {
+      this.searchWorldEventSelected.emit(name);
+      console.log(name)
+    }
+
     render() {
         return (
-            <div class="main-search-div">
+        <div class="main-search-div">
         <input class="my-input-textbox" type="text" value={this.searchText} onInput={this.onUserInput.bind(this)}></input>
         <button class="btn-react" onClick={this.searchFromAPI.bind(this)}>
           Search it!
@@ -46,7 +50,7 @@ export class SearchWorld {
         
         <table id="api-table">
           {this.searchResult.map(r => (
-            <tr>
+            <tr onClick={this.onRowClick.bind(this, r.name)}>
               <td>{r.name}</td>
               <td>{r.marketOpen}</td>
             </tr>
@@ -55,5 +59,4 @@ export class SearchWorld {
       </div>
         )
     }
-
 }

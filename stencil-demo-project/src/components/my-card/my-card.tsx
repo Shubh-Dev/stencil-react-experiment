@@ -1,6 +1,6 @@
-import { Component, h, Prop, State, Watch } from "@stencil/core";
+import { Component, h, Prop, State, Watch, Listen } from "@stencil/core";
 
-// api key
+// api key:
 // 3PTP9MLITVHFAHW7
 
 
@@ -141,6 +141,12 @@ export class MyCard {
     
     watchHadler(newValue: boolean, oldValue: boolean) {
         console.log("The new value of name is " + newValue + " and old value is " + oldValue)
+    }
+
+    @Listen('searchWorldEventSelected', {target: 'body'})
+    searchWorldNameSelectHandler(event: CustomEvent<string>) {
+        this.userName = event.detail;
+
     }
 
     render() {
